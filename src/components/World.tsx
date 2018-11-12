@@ -1,104 +1,104 @@
-import React, { ChangeEvent } from "react";
-import Map from "./Map";
-import "./../App.scss";
-import WorldType from "../types/WorldType";
-import MapType from "../types/MapType";
-import JSONWorld from "./JSONWorld";
+import React, { ChangeEvent } from 'react'
+import Map from './Map'
+import './../App.scss'
+import WorldType from '../types/WorldType'
+import MapType from '../types/MapType'
+import JSONWorld from './JSONWorld'
 
 interface Props {
-  world: WorldType;
-  viewport: { width: number; height: number };
-  unit: number;
+  world: WorldType
+  viewport: { width: number; height: number }
+  unit: number
 }
 
 interface State {
-  world: WorldType;
-  showWorld: boolean;
+  world: WorldType
+  showWorld: boolean
 }
 
 export default class World extends React.Component<Props, State> {
   constructor(props: Props) {
-    super(props);
+    super(props)
     this.state = {
       world: props.world,
-      showWorld: false
-    };
+      showWorld: false,
+    }
   }
 
   loadWorld(world: WorldType) {
-    this.setState({ world });
+    this.setState({ world })
   }
 
   onMapNameChange(id: number, name: string) {
-    const { world } = this.state;
-    world.maps[id].fileName = name;
+    const { world } = this.state
+    world.maps[id].fileName = name
 
-    this.setState({ world });
+    this.setState({ world })
   }
 
   onMapPositionChange(id: number, x: number, y: number) {
-    const { world } = this.state;
-    world.maps[id].x = x;
-    world.maps[id].y = y;
+    const { world } = this.state
+    world.maps[id].x = x
+    world.maps[id].y = y
 
-    this.setState({ world });
+    this.setState({ world })
   }
 
   onMapResize(id: number, width: number, height: number) {
-    const { world } = this.state;
-    world.maps[id].width = width;
-    world.maps[id].height = height;
+    const { world } = this.state
+    world.maps[id].width = width
+    world.maps[id].height = height
 
-    this.setState({ world });
+    this.setState({ world })
   }
 
   onMapDelete(index: number) {
-    const { world } = this.state;
-    world.maps.splice(index, 1);
+    const { world } = this.state
+    world.maps.splice(index, 1)
 
-    this.setState({ world });
+    this.setState({ world })
   }
 
   shiftWorld(dx: number, dy: number) {
-    const { unit } = this.props;
-    const { world } = this.state;
+    const { unit } = this.props
+    const { world } = this.state
     world.maps.forEach(map => {
-      map.x += unit * dx;
-      map.y += unit * dy;
-    });
-    this.setState({ world });
+      map.x += unit * dx
+      map.y += unit * dy
+    })
+    this.setState({ world })
   }
 
   addMap() {
-    const { viewport } = this.props;
-    const { width, height } = viewport;
-    const { world } = this.state;
-    const newIndex = world.maps.length;
+    const { viewport } = this.props
+    const { width, height } = viewport
+    const { world } = this.state
+    const newIndex = world.maps.length
     world.maps.push({
       fileName: `new-map-${newIndex}.tmx`,
       x: 0,
       y: 0,
       width: width,
-      height: height
-    });
+      height: height,
+    })
 
-    this.setState({ world });
+    this.setState({ world })
   }
 
   showJSON() {
-    const { showWorld } = this.state;
-    this.setState({ showWorld: !showWorld });
+    const { showWorld } = this.state
+    this.setState({ showWorld: !showWorld })
   }
 
   autoRename(e: ChangeEvent<HTMLInputElement>) {
-    const name = e.target.value;
-    const { world } = this.state;
+    const name = e.target.value
+    const { world } = this.state
 
     world.maps.forEach((map, index) => {
-      world.maps[index].fileName = `${name}-${index}.tmx`;
-    });
+      world.maps[index].fileName = `${name}-${index}.tmx`
+    })
 
-    this.setState({ world });
+    this.setState({ world })
   }
 
   renderMap(map: MapType, index: number) {
@@ -116,13 +116,13 @@ export default class World extends React.Component<Props, State> {
         }
         onDelete={index => this.onMapDelete(index)}
       />
-    );
+    )
   }
 
   render() {
-    const { world, showWorld } = this.state;
-    const { maps } = world;
-    console.log(world);
+    const { world, showWorld } = this.state
+    const { maps } = world
+    console.log(world)
     return (
       <>
         <div className="World-Toolbar">
@@ -148,6 +148,6 @@ export default class World extends React.Component<Props, State> {
           </div>
         </div>
       </>
-    );
+    )
   }
 }
