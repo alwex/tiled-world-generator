@@ -1,0 +1,179 @@
+$tile: 16px;
+$viewportWidth: 25;
+$viewportHeight: 14;
+$defaultMapWidth: $tile * $viewportWidth;
+$defaultMapHeight: $tile * $viewportHeight;
+
+$dangerColor: darken(red, 4);
+
+$c1: #000000;
+$c2: #676767;
+$c3: #b6b6b6;
+$c4: #ffffff;
+
+$c1: #102533;
+$c2: #42678e;
+$c3: #6f9edf;
+$c4: #cecece;
+
+//$c1: #000000;
+//$c2: #ff55ff;
+//$c3: #55ffff;
+//$c4: #ffffff;
+
+//$c1: #1f1f1f;
+//$c2: #4d533c;
+//$c3: #8b956d;
+//$c4: #c4cfa1;
+
+//$c1: #20283d;
+//$c2: #426e5d;
+//$c3: #e5b083;
+//$c4: #fbf7f3;
+
+//$c1: #300030;
+//$c2: #602878;
+//$c3: #f89020;
+//$c4: #f8f088;
+
+//$c1: #210b2e;
+//$c2: #3a655a;
+//$c3: #77af68;
+//$c4: #dcfecf;
+
+body {
+}
+
+.ParentApp {
+  background-color: $c1;
+  background-size: $tile $tile;
+  background-image: linear-gradient(
+      to right,
+      darken($c2, 18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, darken($c2, 18) 1px, transparent 1px);
+  color: $c1;
+  height: 100%;
+  margin: 0;
+  height: 10000px;
+  width: 10000px;
+}
+
+.App {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  background-size: $defaultMapWidth $defaultMapHeight;
+  background-image: linear-gradient(
+      to right,
+      darken($c3, 18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, darken($c3, 18) 1px, transparent 1px);
+}
+
+.World-Toolbar {
+  position: fixed;
+  padding: 3px;
+  width: 100%;
+  bottom: 0;
+  background-color: $c2;
+  z-index: 999999;
+  border-top: 1px solid $c4;
+}
+
+.World-JSON {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 999999;
+
+  textarea {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.Map {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 16px $c2;
+  background-color: $c4;
+  opacity: 0.8;
+  padding: 5px;
+  background-image: repeating-linear-gradient(
+    145deg,
+    darken($c4, 8),
+    darken($c4, 8) 16px,
+    $c4 16px,
+    $c4 32px
+  );
+  .Map-Name {
+    font-weight: bold;
+    color: $c4;
+    background-color: $c2;
+    opacity: 0.8;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 6px 60px 0 60px;
+  }
+}
+
+.Modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: $c2;
+  padding: 30px;
+  border-radius: 5px;
+  opacity: 1;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($c1, 0.6);
+}
+
+button,
+input {
+  border: 1px solid $c1;
+  margin: 3px;
+  color: $c1;
+  background-color: $c4;
+}
+
+.IconButton {
+  cursor: pointer;
+  font-size: 2em;
+}
+
+.Primary {
+  color: $c2;
+}
+
+.Danger {
+  color: $dangerColor;
+}
+
+.TopRight {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.TopLeft {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
